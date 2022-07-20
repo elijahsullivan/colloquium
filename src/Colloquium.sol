@@ -14,12 +14,8 @@ contract Colloquium is ERC721 {
         return string(abi.encodePacked("https://ipfs.io/ipfs/", contentIdentifierByTokenId[id]));
     }
 
-    // might change this to mint to msg.sender (need to change frontend abi if so)
-    // using (address to) here rather than msg.sender could result in a denial of
-    // service attack, albeit costly, where a bad actor mints CIDs to the zero address
     function mint(address to, string calldata cid) public {
         uint256 id = uint256(keccak256(abi.encode(cid)));
-        // doing this costs a lot of gas.. maybe use the graph
         contentIdentifierByTokenId[id] = cid;
         _safeMint(to, id);
         emit Mint(to, id, cid, cid);
