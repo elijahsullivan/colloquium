@@ -14,26 +14,25 @@ import { useAuthor } from "hooks/useAuthor";
 import { firstOrValue } from "core/firstOrValue";
 import { formatAddress as format } from "core/formatAddress";
 import { generateTokenId } from "core/generateTokenId";
-import { BigNumber } from "ethers";
+import { BigNumber, utils } from "ethers";
 
 const Tip = ({ address }: { address: string }) => {
+  const TIP_AMOUNT = BigNumber.from("1000000000000000");
   const { isLoading, sendTransaction } = useSendTransaction({
     request: {
       to: address,
-      value: BigNumber.from("1000000000000000"), // 0.001 ETH
+      value: TIP_AMOUNT,
     },
   });
 
   return (
-    <div>
-      <button
-        disabled={isLoading}
-        onClick={() => sendTransaction()}
-        className="font-medium rounded bg-green-100 px-3 py-1"
-      >
-        Tip 0.001 ETH
-      </button>
-    </div>
+    <button
+      disabled={isLoading}
+      onClick={() => sendTransaction()}
+      className="font-medium rounded bg-green-100 px-3 py-1 self-start"
+    >
+      {`Tip ${utils.formatEther(TIP_AMOUNT)} ETH`}
+    </button>
   );
 };
 
