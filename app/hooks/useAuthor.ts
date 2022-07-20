@@ -9,8 +9,6 @@ export const useAuthor = (tokenId: string) => {
   const [author, setAuthor] = useState("");
   const chainId = useChain();
 
-  // This should be optimized to use lower-level ethers library
-  // to search on the indexed tokenId
   useContractEvent({
     addressOrName: COLLOQUIUM_ADDRESS,
     contractInterface: contract.abi,
