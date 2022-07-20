@@ -1,5 +1,3 @@
-// COPIED CODE FROM RAINBOWKIT – THANK YOU!
-
 export function formatAddress(address: string): string {
   const leadingChars = 4;
   const trailingChars = 4;
