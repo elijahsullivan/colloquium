@@ -24,9 +24,9 @@ const LoadingBanner = () => (
 const LoadedBanner = ({ cid }: { cid: string }) => (
   <section className="bg-green-100 p-4 mb-2 rounded">
     <div>
-      Content Published:{" "}
+      Content Published!{" "}
       <Link href={`/read/${cid}`}>
-        <a className="underline">{cid}</a>
+        <a className="underline">Read Article</a>
       </Link>
     </div>
   </section>
@@ -113,6 +113,7 @@ const Write: NextPage = () => {
 
   const isClearDisabled = text.length === 0 && title.length === 0;
   const isPublishDisabled = text.length === 0 || title.length === 0;
+  const isMintDisabled = !(cid && address);
 
   return (
     <>
@@ -131,7 +132,7 @@ const Write: NextPage = () => {
           <Button type="submit" disabled={isPublishDisabled}>
             Publish
           </Button>
-          <Button disabled={!cid} onClick={handleMint}>
+          <Button disabled={isMintDisabled} onClick={handleMint}>
             Mint
           </Button>
         </section>
@@ -143,7 +144,7 @@ const Write: NextPage = () => {
           onChange={handleTitleChange}
         />
         <textarea
-          className="my-2 py-2 text-xl font-medium outline-none w-full grow font-serif"
+          className="my-2 py-2 text-xl font-medium outline-none w-full grow font-serif leading-relaxed"
           placeholder="Tell the world what's on your mind..."
           value={text}
           onChange={handleChange}

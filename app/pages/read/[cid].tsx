@@ -1,21 +1,41 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useStorageReadJSON } from "core/storage";
 import Link from "next/link";
-import { utils, BigNumber } from "ethers";
-import { erc721ABI, useContractRead, useNetwork } from "wagmi";
+import { useStorageReadJSON } from "core/storage";
+import {
+  erc721ABI,
+  useContractRead,
+  useNetwork,
+  useSendTransaction,
+} from "wagmi";
 import { COLLOQUIUM_ADDRESS } from "core/constants";
 import { useFormatAddress } from "hooks/useFormatAddress";
 import { useAuthor } from "hooks/useAuthor";
 import { firstOrValue } from "core/firstOrValue";
 import { formatAddress as format } from "core/formatAddress";
+import { generateTokenId } from "core/generateTokenId";
+import { BigNumber } from "ethers";
 
-// This uses the same process of encoding/hashing the CID
-// as the colloquium smart contract
-const generateTokenId = (cid: string) =>
-  BigNumber.from(
-    utils.keccak256(utils.defaultAbiCoder.encode(["string"], [cid]))
-  ).toString();
+const Tip = ({ address }: { address: string }) => {
+  const { isLoading, sendTransaction } = useSendTransaction({
+    request: {
+      to: address,
+      value: BigNumber.from("1000000000000000"), // 0.001 ETH
+    },
+  });
+
+  return (
+    <div>
+      <button
+        disabled={isLoading}
+        onClick={() => sendTransaction()}
+        className="font-medium rounded bg-green-100 px-3 py-1"
+      >
+        Tip 0.001 ETH
+      </button>
+    </div>
+  );
+};
 
 const Content = ({ cid }: { cid: string }) => {
   const { data, isLoading } = useStorageReadJSON(cid);
@@ -29,7 +49,7 @@ const Content = ({ cid }: { cid: string }) => {
     contractInterface: erc721ABI,
     functionName: "ownerOf",
     args: [tokenId],
-  }) as { data: string | undefined; isError: boolean }; // better way to do this?
+  }) as { data: string | undefined; isError: boolean };
 
   const tokenOwnerName = useFormatAddress({ address: tokenOwner });
 
@@ -54,9 +74,10 @@ const Content = ({ cid }: { cid: string }) => {
               </h2>
             </section>
           </section>
-          <p className="text-xl font-medium leading-loose font-serif">
+          <p className="text-xl font-medium leading-relaxed font-serif">
             {data.body}
           </p>
+          {tokenOwner && <Tip address={tokenOwner} />}
         </div>
       )}
       <section className="bg-purple-50 p-4 mt-10 rounded">

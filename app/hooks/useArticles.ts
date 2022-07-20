@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Events } from "types/contract";
 import { useContractEvent } from "wagmi";
 import contract from "../../out/Author.sol/Author.json";
+import { useChain } from "./useChain";
 
 export const useArticles = () => {
   const [articles, setArticles] = useState<
@@ -12,11 +13,13 @@ export const useArticles = () => {
       cid: string;
     }[]
   >([]);
+  const chainId = useChain();
+
   useContractEvent({
     addressOrName: COLLOQUIUM_ADDRESS,
     contractInterface: contract.abi,
     eventName: Events.MINT,
-    chainId: 31337, // FIX THIS
+    chainId,
     listener: (event) => {
       const [minter, tokenId, _, contentId] = event;
       setArticles([
