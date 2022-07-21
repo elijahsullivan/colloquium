@@ -9,15 +9,13 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { Web3StorageProvider, createStorageClient } from "core/storage";
 import Layout from "components/layout";
 
-const developmentChains = [chain.localhost, chain.polygonMumbai];
-const productionChains = [chain.polygon, chain.mainnet];
-const allowedChains =
-  process.env.NODE_ENV === "production" ? productionChains : developmentChains;
-
-const { chains, provider, webSocketProvider } = configureChains(allowedChains, [
-  alchemyProvider({ alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-  publicProvider(),
-]);
+const { chains, provider, webSocketProvider } = configureChains(
+  [chain.localhost, chain.polygon, chain.polygonMumbai, chain.mainnet],
+  [
+    alchemyProvider({ alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+    publicProvider(),
+  ]
+);
 
 const { connectors } = getDefaultWallets({
   appName: "colloquium",
