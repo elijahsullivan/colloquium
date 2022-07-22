@@ -10,7 +10,7 @@ import { Web3StorageProvider, createStorageClient } from "core/storage";
 import Layout from "components/layout";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [chain.localhost, chain.polygon, chain.polygonMumbai, chain.mainnet],
+  [chain.polygonMumbai, chain.polygon, chain.mainnet],
   [
     alchemyProvider({ alchemyId: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     publicProvider(),

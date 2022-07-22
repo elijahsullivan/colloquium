@@ -1,10 +1,10 @@
 import React from "react";
 import type { NextPage } from "next";
 import Article from "components/article";
-import { useArticles } from "hooks/useArticles";
+import { useArticleEvents } from "hooks/useArticleEvents";
 
 const Read: NextPage = () => {
-  const articles = useArticles();
+  const articles = useArticleEvents();
 
   return (
     <div className="flex flex-col gap-4">

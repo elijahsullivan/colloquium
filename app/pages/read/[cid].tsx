@@ -10,7 +10,7 @@ import {
 } from "wagmi";
 import { COLLOQUIUM_ADDRESS } from "core/constants";
 import { useFormatAddress } from "hooks/useFormatAddress";
-import { useAuthor } from "hooks/useAuthor";
+import { useAuthorEvent } from "hooks/useAuthorEvent";
 import { firstOrValue } from "core/firstOrValue";
 import { formatAddress as format } from "core/formatAddress";
 import { generateTokenId } from "core/generateTokenId";
@@ -40,7 +40,7 @@ const Content = ({ cid }: { cid: string }) => {
   const { data, isLoading } = useStorageReadJSON(cid);
   const { chain } = useNetwork();
   const tokenId = generateTokenId(cid);
-  const author = useAuthor(tokenId);
+  const author = useAuthorEvent(tokenId);
   const authorName = useFormatAddress({ address: author });
 
   const { data: tokenOwner, isError } = useContractRead({
@@ -93,20 +93,10 @@ const Content = ({ cid }: { cid: string }) => {
           Token ID:{" "}
           <a
             className="underline"
-            href={`${chain?.blockExplorers?.default.url}/token/${tokenId}`}
+            href={`${chain?.blockExplorers?.default.url}/token/${COLLOQUIUM_ADDRESS}?a=${tokenId}`}
           >
             {format(tokenId)}
           </a>
-        </div>
-        <div>
-          Author:{" "}
-          {author ? (
-            <Link href={`/author/${author}`}>
-              <a className="underline">{authorName}</a>
-            </Link>
-          ) : (
-            <span>Not Found</span>
-          )}
         </div>
         <div>
           {isError ? (
