@@ -1,18 +1,13 @@
 import Link from "next/link";
 import { useStorageReadJSON } from "core/storage";
 import { useFormatAddress } from "hooks/useFormatAddress";
-
-interface ArticleProps {
-  minter: string;
-  tokenId: string;
-  cid: string;
-}
+import { Article } from "core/types/articles";
 
 const Loader = () => (
   <div className="animate-pulse w-100 md:w-1/2 h-6 bg-slate-300 rounded"></div>
 );
 
-const Article = ({ minter, cid }: ArticleProps) => {
+const Article = ({ minter, cid }: Article) => {
   const username = useFormatAddress({ address: minter });
   const { data, isLoading, isError } = useStorageReadJSON(cid);
   if (isLoading || isError) return null;

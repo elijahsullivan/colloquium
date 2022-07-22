@@ -3,15 +3,10 @@ import { utils, Event } from "ethers";
 import { useWebSocketProvider, useContract } from "wagmi";
 import { COLLOQUIUM_ADDRESS, DEPLOYMENT_BLOCK } from "core/constants";
 import contract from "core/Colloquium.json";
+import { Article } from "core/types/articles";
 
 export const useArticleEvents = (minter?: string) => {
-  const [articles, setArticles] = useState<
-    {
-      minter: string;
-      tokenId: string;
-      cid: string;
-    }[]
-  >([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const webSocketProvider = useWebSocketProvider();
 
   const colloquium = useContract({
