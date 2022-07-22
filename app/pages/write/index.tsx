@@ -65,7 +65,7 @@ const ProgressBanner = ({
 
 const Write: NextPage = () => {
   const { text: title, setText: setTitle, clearText: clearTitle } = useText("");
-  const { text, setText, clearText, spoofText } = useText("");
+  const { text, setText, clearText } = useText("");
   const {
     data: cid,
     write,
@@ -125,7 +125,6 @@ const Write: NextPage = () => {
       />
       <form onSubmit={handleSubmit} className="flex flex-col grow">
         <section className="flex justify-end gap-4 bg-slate-200 rounded p-4">
-          <Button onClick={spoofText}>Spoof</Button>
           <Button disabled={isClearDisabled} onClick={handleClear}>
             Discard
           </Button>
