@@ -15,6 +15,8 @@ associated NFT.
 
 ## Technology
 
+- [polygon](https://polygon.technology/)
+- [spheron](https://spheron.network/)
 - [foundry](https://github.com/foundry-rs/foundry)
 - [next.js](https://github.com/vercel/next.js)
 - [web3.storage](https://github.com/web3-storage/web3.storage)
