@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { utils, Event } from "ethers";
 import { useWebSocketProvider, useContract } from "wagmi";
 import { COLLOQUIUM_ADDRESS, DEPLOYMENT_BLOCK } from "core/constants";
-import contract from "../../out/Colloquium.sol/Colloquium.json";
+import contract from "core/Colloquium.json";
 
 export const useArticleEvents = (minter?: string) => {
   const [articles, setArticles] = useState<

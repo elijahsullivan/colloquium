@@ -6,7 +6,7 @@ import Button from "components/button";
 import useText from "hooks/useText";
 import { useAccount, useContractWrite, useWaitForTransaction } from "wagmi";
 import { COLLOQUIUM_ADDRESS } from "core/constants";
-import contract from "../../../out/Colloquium.sol/Colloquium.json";
+import contract from "core/Colloquium.json";
 
 interface ProgressBannerProps {
   data: string | undefined;

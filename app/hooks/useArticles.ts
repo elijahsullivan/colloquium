@@ -2,7 +2,7 @@ import { COLLOQUIUM_ADDRESS } from "core/constants";
 import { useState } from "react";
 import { Events } from "types/contract";
 import { useContractEvent } from "wagmi";
-import contract from "../../out/Colloquium.sol/Colloquium.json";
+import contract from "core/Colloquium.json";
 import { useChain } from "./useChain";
 
 export const useArticles = () => {
