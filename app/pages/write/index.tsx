@@ -37,7 +37,7 @@ const MintedBanner = ({ cid }: { cid: string }) => (
     <div>
       Content Minted:{" "}
       <Link href={`/read/${cid}`}>
-        <a className="underline">{cid}</a>
+        <a className="underline">Read Article</a>
       </Link>
     </div>
   </section>

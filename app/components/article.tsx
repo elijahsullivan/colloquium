@@ -18,11 +18,10 @@ const Article = ({ minter, cid }: Article) => {
       <Link href={`/read/${cid}`}>
         <a className="underline font-medium text-xl">{data?.title}</a>
       </Link>
+      <p className="text-slate-600 line-clamp-2">{data?.body}</p>
       <span> by </span>
       <Link href={`/author/${minter}`}>
-        <a className="underline inline bg-purple-100 rounded py-1 px-2">
-          {username}
-        </a>
+        <a className="underline">{username}</a>
       </Link>
     </li>
   );

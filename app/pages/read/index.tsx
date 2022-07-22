@@ -12,7 +12,7 @@ const Read: NextPage = () => {
       {articles.length === 0 ? (
         <div>No articles found.</div>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-6">
           {articles
             .sort((a, b) => b.block - a.block)
             .map(({ cid, minter, tokenId, block }) => (
