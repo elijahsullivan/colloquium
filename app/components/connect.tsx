@@ -28,9 +28,9 @@ export const ConnectButton = () => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="flex items-center bg-purple-100 px-2 py-1 rounded"
+                    className="flex items-center font-medium bg-purple-100 px-2 py-1 rounded"
                   >
-                    Connect Wallet
+                    Connect
                   </button>
                 );
               }
@@ -50,14 +50,14 @@ export const ConnectButton = () => {
                   <button
                     onClick={openChainModal}
                     type="button"
-                    className="flex items-center bg-purple-100 px-2 py-1 rounded-l border-r border-purple-200"
+                    className="flex items-center font-medium bg-purple-100 px-2 py-1 rounded-l border-r border-purple-200"
                   >
                     {chain.name}
                   </button>
                   <button
                     onClick={openAccountModal}
                     type="button"
-                    className="bg-purple-100 px-2 py-1 rounded-r"
+                    className="bg-purple-100 font-medium px-2 py-1 rounded-r"
                   >
                     {account.displayName}
                   </button>

@@ -11,7 +11,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
       </Head>
 
       <Header />
-      <main className="flex flex-col px-8 pt-8 min-w-full grow">
+      <main className="flex flex-col px-4 sm:px-8 pt-4 sm:pt-8 min-w-full grow">
         {children}
       </main>
     </div>
