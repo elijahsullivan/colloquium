@@ -28,14 +28,17 @@ const Author: NextPage = () => {
         <div>No artices found for this author.</div>
       ) : (
         <ul className="flex flex-col gap-2">
-          {articles.map(({ minter, tokenId, cid }) => (
-            <Article
-              key={tokenId}
-              minter={minter}
-              tokenId={tokenId}
-              cid={cid}
-            />
-          ))}
+          {articles
+            .sort((a, b) => b.block - a.block)
+            .map(({ minter, tokenId, cid, block }) => (
+              <Article
+                key={tokenId}
+                minter={minter}
+                tokenId={tokenId}
+                cid={cid}
+                block={block}
+              />
+            ))}
         </ul>
       )}
     </div>

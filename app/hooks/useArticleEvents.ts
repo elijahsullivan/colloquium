@@ -30,6 +30,7 @@ export const useArticleEvents = (minter?: string) => {
             minter: minter.toString(),
             tokenId: tokenId.toString(),
             cid: contentId,
+            block: event.blockNumber,
           };
         });
         setArticles([...articles, ...article]);

@@ -13,14 +13,17 @@ const Read: NextPage = () => {
         <div>No articles found.</div>
       ) : (
         <ul className="flex flex-col gap-2">
-          {articles.map(({ cid, minter, tokenId }) => (
-            <Article
-              key={tokenId}
-              minter={minter}
-              tokenId={tokenId}
-              cid={cid}
-            />
-          ))}
+          {articles
+            .sort((a, b) => b.block - a.block)
+            .map(({ cid, minter, tokenId, block }) => (
+              <Article
+                key={tokenId}
+                minter={minter}
+                tokenId={tokenId}
+                cid={cid}
+                block={block}
+              />
+            ))}
         </ul>
       )}
     </div>
