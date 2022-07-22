@@ -27,7 +27,7 @@ const Author: NextPage = () => {
       {articles.length === 0 ? (
         <div>No artices found for this author.</div>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-6">
           {articles
             .sort((a, b) => b.block - a.block)
             .map(({ minter, tokenId, cid, block }) => (
