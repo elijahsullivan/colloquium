@@ -17,9 +17,10 @@ associated NFT.
 
 - [polygon](https://polygon.technology/)
 - [spheron](https://spheron.network/)
-- [foundry](https://github.com/foundry-rs/foundry)
-- [next.js](https://github.com/vercel/next.js)
 - [web3.storage](https://github.com/web3-storage/web3.storage)
+- [alchemy](https://www.alchemy.com/)
 - [wagmi](https://github.com/tmm/wagmi)
 - [rainbowkit](https://github.com/rainbow-me/rainbowkit)
 - [react-query](https://github.com/TanStack/query)
+- [next.js](https://github.com/vercel/next.js)
+- [foundry](https://github.com/foundry-rs/foundry)
