@@ -2,43 +2,18 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useStorageRead } from "hooks/useStorageRead";
-import {
-  erc721ABI,
-  useContractRead,
-  useNetwork,
-  useSendTransaction,
-} from "wagmi";
+import { erc721ABI, useContractRead } from "wagmi";
 import { COLLOQUIUM_ADDRESS } from "core/constants";
 import { useFormatAddress } from "hooks/useFormatAddress";
 import { useAuthorEvent } from "hooks/useAuthorEvent";
 import { firstOrValue } from "core/firstOrValue";
-import { formatAddress as format } from "core/formatAddress";
 import { generateTokenId } from "core/generateTokenId";
-import { BigNumber, utils } from "ethers";
-
-const Tip = ({ address }: { address: string }) => {
-  const TIP_AMOUNT = BigNumber.from("1000000000000000");
-  const { isLoading, sendTransaction } = useSendTransaction({
-    request: {
-      to: address,
-      value: TIP_AMOUNT,
-    },
-  });
-
-  return (
-    <button
-      disabled={isLoading}
-      onClick={() => sendTransaction()}
-      className="font-medium rounded bg-green-100 px-3 py-1 self-start"
-    >
-      {`Tip ${utils.formatEther(TIP_AMOUNT)} ETH`}
-    </button>
-  );
-};
+import { Tip } from "components/tip";
+import { Provenance } from "components/provenance";
+import { Details } from "components/details";
 
 const Content = ({ cid }: { cid: string }) => {
   const { data, isLoading } = useStorageRead(cid);
-  const { chain } = useNetwork();
   const tokenId = generateTokenId(cid);
   const author = useAuthorEvent(tokenId);
   const authorName = useFormatAddress({ address: author });
@@ -49,8 +24,6 @@ const Content = ({ cid }: { cid: string }) => {
     functionName: "ownerOf",
     args: [tokenId],
   }) as { data: string | undefined; isError: boolean };
-
-  const tokenOwnerName = useFormatAddress({ address: tokenOwner });
 
   return (
     <>
@@ -79,40 +52,20 @@ const Content = ({ cid }: { cid: string }) => {
           {tokenOwner && <Tip address={tokenOwner} />}
         </div>
       )}
-      <section className="bg-purple-50 p-4 mt-10 rounded">
-        <div>
-          CID:{" "}
-          <a
-            className="underline"
-            href={`https://ipfs.io/ipfs/${cid}/colloquium.json`}
-          >
-            {format(cid)}
-          </a>
-        </div>
-        <div>
-          Token ID:{" "}
-          <a
-            className="underline"
-            href={`${chain?.blockExplorers?.default.url}/token/${COLLOQUIUM_ADDRESS}?a=${tokenId}`}
-          >
-            {format(tokenId)}
-          </a>
-        </div>
-        <div>
-          {isError ? (
-            <div>Ownership not claimed</div>
-          ) : (
-            <div>
-              Token Owner:{" "}
-              <a
-                className="underline"
-                href={`${chain?.blockExplorers?.default.url}/address/${tokenOwner}`}
-              >
-                {tokenOwnerName}
-              </a>
-            </div>
-          )}
-        </div>
+      <section className="bg-purple-50 p-4 mt-10 rounded flex flex-col gap-2">
+        <section>
+          <h3 className="font-semibold">Details</h3>
+          <Details
+            cid={cid}
+            tokenId={tokenId}
+            tokenOwner={tokenOwner}
+            isError={isError}
+          />
+        </section>
+        <section>
+          <h3 className="font-semibold">Provenance</h3>
+          <Provenance tokenId={tokenId} tokenOwner={tokenOwner} />
+        </section>
       </section>
     </>
   );
@@ -122,7 +75,8 @@ const Article: NextPage = () => {
   const router = useRouter();
   const { cid } = router.query;
 
-  return cid ? <Content cid={firstOrValue(cid)} /> : <></>;
+  if (!cid) return <></>;
+  return <Content cid={firstOrValue(cid)} />;
 };
 
 export default Article;

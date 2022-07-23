@@ -36,6 +36,7 @@ the colloquium smart contract.
 
 - [polygon](https://polygon.technology/)
 - [spheron](https://spheron.network/)
+- [covalent](https://www.covalenthq.com/)
 - [web3.storage](https://github.com/web3-storage/web3.storage)
 - [alchemy](https://www.alchemy.com/)
 - [wagmi](https://github.com/tmm/wagmi)
