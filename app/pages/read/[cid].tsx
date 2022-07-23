@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useStorageReadJSON } from "core/storage";
+import { useStorageRead } from "hooks/useStorageRead";
 import {
   erc721ABI,
   useContractRead,
@@ -37,7 +37,7 @@ const Tip = ({ address }: { address: string }) => {
 };
 
 const Content = ({ cid }: { cid: string }) => {
-  const { data, isLoading } = useStorageReadJSON(cid);
+  const { data, isLoading } = useStorageRead(cid);
   const { chain } = useNetwork();
   const tokenId = generateTokenId(cid);
   const author = useAuthorEvent(tokenId);

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useStorageReadJSON } from "core/storage";
+import { useStorageRead } from "hooks/useStorageRead";
 import { useFormatAddress } from "hooks/useFormatAddress";
 import { Article } from "core/types/articles";
 
@@ -9,7 +9,7 @@ const Loader = () => (
 
 const Article = ({ minter, cid }: Article) => {
   const username = useFormatAddress({ address: minter });
-  const { data, isLoading, isError } = useStorageReadJSON(cid);
+  const { data, isLoading, isError } = useStorageRead(cid);
   if (isLoading || isError) return null;
   if (isError) return <div>Error loading {cid}</div>;
   if (isLoading) return <Loader />;

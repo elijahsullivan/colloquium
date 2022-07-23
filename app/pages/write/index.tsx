@@ -1,7 +1,7 @@
 import React from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useStorageWrite } from "core/storage";
+import { useStorageWrite } from "hooks/useStorageWrite";
 import Button from "components/button";
 import useText from "hooks/useText";
 import { useAccount, useContractWrite, useWaitForTransaction } from "wagmi";
