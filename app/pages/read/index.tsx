@@ -51,7 +51,7 @@ const Owners = () => {
   const { data: owners, isLoading, isError } = useOwners({ chainId });
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading articles</div>;
+  if (isError) return <div>Error loading articles owners.</div>;
   if (owners?.data?.items.length === 0)
     return <div>No article owners found.</div>;
   return (
